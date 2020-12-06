@@ -2,11 +2,11 @@ function [layers] = load_layers()
     layers = [
         imageInputLayer([256 256 3])
 
+        dropoutLayer(0.4)
+        
         convolution2dLayer(3,64,'Padding','same')
         batchNormalizationLayer
         reluLayer
-        
-        dropoutLayer(0.3)
 
 %        convolution2dLayer(3,64,'Padding','same')
 %        batchNormalizationLayer
@@ -32,7 +32,7 @@ function [layers] = load_layers()
         batchNormalizationLayer
         reluLayer
 
-        dropoutLayer(0.3)
+        dropoutLayer(0.4)
         
         convolution2dLayer(3,256,'Padding','same')
         batchNormalizationLayer
@@ -48,7 +48,7 @@ function [layers] = load_layers()
         batchNormalizationLayer
         reluLayer
 
-        dropoutLayer(0.3)
+        dropoutLayer(0.4)
 
         convolution2dLayer(3,512,'Padding','same')
         batchNormalizationLayer
@@ -64,7 +64,7 @@ function [layers] = load_layers()
         batchNormalizationLayer
         reluLayer
 
-        dropoutLayer(0.3)
+        dropoutLayer(0.4)
 
         convolution2dLayer(3,512,'Padding','same')
         batchNormalizationLayer
@@ -75,10 +75,11 @@ function [layers] = load_layers()
         fullyConnectedLayer(4096)
         reluLayer
 
-        dropoutLayer(0.3)
+        dropoutLayer(0.5)
 
         fullyConnectedLayer(4096)
         reluLayer
+    
         fullyConnectedLayer(10)
 
         softmaxLayer
