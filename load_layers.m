@@ -1,22 +1,22 @@
-function [layers] = load_layers()
+function [layers] = load_layers(input_size)
     layers = [
-        imageInputLayer([256 256 3])
+        imageInputLayer(input_size)
 
-        dropoutLayer(0.4)
+   %     dropoutLayer(0.4)
         
         convolution2dLayer(3,64,'Padding','same')
         batchNormalizationLayer
         reluLayer
 
-%        convolution2dLayer(3,64,'Padding','same')
-%        batchNormalizationLayer
-%        reluLayer
+        convolution2dLayer(3,64,'Padding','same')
+        batchNormalizationLayer
+        reluLayer
 
         maxPooling2dLayer(2,'Stride',2)
 
- %       convolution2dLayer(3,128,'Padding','same')
- %       batchNormalizationLayer
- %       reluLayer
+        convolution2dLayer(3,128,'Padding','same')
+        batchNormalizationLayer
+        reluLayer
         
         convolution2dLayer(3,128,'Padding','same')
         batchNormalizationLayer
@@ -24,15 +24,15 @@ function [layers] = load_layers()
 
         maxPooling2dLayer(2,'Stride',2)
 
-  %      convolution2dLayer(3,256,'Padding','same')
-  %      batchNormalizationLayer
-  %      reluLayer
+        convolution2dLayer(3,256,'Padding','same')
+        batchNormalizationLayer
+        reluLayer
         
         convolution2dLayer(3,256,'Padding','same')
         batchNormalizationLayer
         reluLayer
 
-        dropoutLayer(0.4)
+  %      dropoutLayer(0.4)
         
         convolution2dLayer(3,256,'Padding','same')
         batchNormalizationLayer
@@ -48,7 +48,7 @@ function [layers] = load_layers()
         batchNormalizationLayer
         reluLayer
 
-        dropoutLayer(0.4)
+   %     dropoutLayer(0.4)
 
         convolution2dLayer(3,512,'Padding','same')
         batchNormalizationLayer
@@ -64,7 +64,7 @@ function [layers] = load_layers()
         batchNormalizationLayer
         reluLayer
 
-        dropoutLayer(0.4)
+    %    dropoutLayer(0.4)
 
         convolution2dLayer(3,512,'Padding','same')
         batchNormalizationLayer
@@ -75,7 +75,7 @@ function [layers] = load_layers()
         fullyConnectedLayer(4096)
         reluLayer
 
-        dropoutLayer(0.5)
+    %    dropoutLayer(0.5)
 
         fullyConnectedLayer(4096)
         reluLayer

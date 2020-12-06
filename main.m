@@ -26,7 +26,7 @@ options = trainingOptions(...
     'CheckpointPath', fullfile(pwd, 'checkpoints'),...
     'Plots','training-progress')
 
-layers = load_layers
+layers = load_layers(image_size)
 
 image_recognition_net = trainNetwork(training, layers, options)
 
