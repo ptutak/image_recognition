@@ -1,5 +1,5 @@
 
-function [load_image_function] = load_image_generator(image_size)
+function [load_image_function] = crop_image_generator(image_size)
     function [image] = load_image(image_path)
         read_image = imread(image_path);
         read_image_size = size(read_image);
