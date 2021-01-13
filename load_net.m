@@ -13,12 +13,12 @@ function [output] = load_net(file_path)
         layer_name = '';
         if startsWith(layer.Name, 'conv')
             layer_name = [
-                'Conv, ', 'FilterSize: ', num2str(layer.FilterSize), ', ', 'FilterNumber: ', num2str(layer.NumFilters)
+                'Conv, ', 'FilterSize: [', num2str(layer.FilterSize), '], ', 'FilterNumber: ', num2str(layer.NumFilters)
             ];
         elseif startsWith(layer.Name, 'maxpool')
-            layer_name = ['MaxPool, ', 'PoolSize: ', num2str(layer.PoolSize), ', ', 'Stride: ', num2str(layer.Stride)];
+            layer_name = ['MaxPool, ', 'PoolSize: [', num2str(layer.PoolSize), '], ', 'Stride: [', num2str(layer.Stride), ']'];
         elseif startsWith(layer.Name, 'avgpool')
-            layer_name = ['AvgPool, ', 'PoolSize: ', num2str(layer.PoolSize), ', ', 'Stride: ', num2str(layer.Stride)];
+            layer_name = ['AvgPool, ', 'PoolSize: [', num2str(layer.PoolSize), '], ', 'Stride: [', num2str(layer.Stride), ']'];
         elseif startsWith(layer.Name, 'dropout')
             layer_name = ['Dropout, ', 'Probability: ', num2str(layer.Probability)];
         elseif startsWith(layer.Name, 'fc')
@@ -28,7 +28,7 @@ function [output] = load_net(file_path)
         elseif startsWith(layer.Name, 'classoutput')
             layer_name = ['ClassOutput, ', 'ClassNumber: ', num2str(layer.OutputSize)];
         elseif startsWith(layer.Name, 'imageinput')
-            layer_name = ['ImageInput, ', 'InputSize: ', num2str(layer.InputSize)];
+            layer_name = ['ImageInput, ', 'InputSize: [', num2str(layer.InputSize), ']'];
         end
         if ~ strcmp(layer_name, '')
             layer_strings = [layer_strings; layer_name];
