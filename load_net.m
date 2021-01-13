@@ -31,22 +31,26 @@ function [output] = load_net(file_path)
             layer_name = ['ImageInput, ', 'InputSize: [', num2str(layer.InputSize), ']'];
         end
         if ~ strcmp(layer_name, '')
-            layer_strings = [layer_strings; layer_name];
+            layer_strings = [layer_strings; string(layer_name)];
         end
     end
     
     output.layers = layer_strings;
     output.accuracy = accuracy;
     option_output = struct;
-    option_output.optimizer = class(options);
+    if isa(options, 'nnet.cnn.TrainingOptionsSGDM')
+        option_output.optimizer = "SGDM";
+    else
+        option_output.optimizer = "ADAM";
+    end
     option_output.learn_rate = options.InitialLearnRate;
     option_output.patience = options.ValidationPatience;
     option_output.drop_period = options.LearnRateScheduleSettings.DropPeriod;
     option_output.drop_rate_factor = options.LearnRateScheduleSettings.DropRateFactor;
     if ~ isa(training.DataAugmentation, 'imageDataAugmenter')
-        option_output.image_augmentation = "None";
+        option_output.image_augmentation = "No";
     else
-        option_output.image_augmentation = "RandXScale: [0.9000 1.1000], RandYScale: [0.9000 1.1000], RandXTranslation: [-30 30], RandYTranslation: [-30 30]";
+        option_output.image_augmentation = "Yes";
     end
     output.options = option_output;
 end
