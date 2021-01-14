@@ -12,23 +12,25 @@ function [output] = load_net(file_path)
         layer = image_recognition_net.Layers(i);
         layer_name = '';
         if startsWith(layer.Name, 'conv')
-            layer_name = [
-                'Conv, ', 'FilterSize: [', num2str(layer.FilterSize), '], ', 'FilterNumber: ', num2str(layer.NumFilters)
-            ];
+            filter_size = [num2str(layer.FilterSize(1)), 'x', num2str(layer.FilterSize(2))];
+            layer_name = ['Conv, ', filter_size, ', ', num2str(layer.NumFilters)];
         elseif startsWith(layer.Name, 'maxpool')
-            layer_name = ['MaxPool, ', 'PoolSize: [', num2str(layer.PoolSize), '], ', 'Stride: [', num2str(layer.Stride), ']'];
+            pool_size = [num2str(layer.PoolSize(1)), 'x', num2str(layer.PoolSize(2))];
+            layer_name = ['MaxPool, ', pool_size];
         elseif startsWith(layer.Name, 'avgpool')
-            layer_name = ['AvgPool, ', 'PoolSize: [', num2str(layer.PoolSize), '], ', 'Stride: [', num2str(layer.Stride), ']'];
+            pool_size = [num2str(layer.PoolSize(1)), 'x', num2str(layer.PoolSize(2))];
+            layer_name = ['AvgPool, ', pool_size];
         elseif startsWith(layer.Name, 'dropout')
-            layer_name = ['Dropout, ', 'Probability: ', num2str(layer.Probability)];
+            layer_name = ['Dropout, ', num2str(layer.Probability)];
         elseif startsWith(layer.Name, 'fc')
-            layer_name = ['FullyConnected, ', 'NeuronNumber: ', num2str(min(layer.InputSize, layer.OutputSize))];
+            layer_name = ['FullyConnected, ', num2str(min(layer.InputSize, layer.OutputSize))];
         elseif startsWith(layer.Name, 'softmax')
             layer_name = ['SoftMax'];
         elseif startsWith(layer.Name, 'classoutput')
-            layer_name = ['ClassOutput, ', 'ClassNumber: ', num2str(layer.OutputSize)];
+            layer_name = ['ClassOutput, ', num2str(layer.OutputSize)];
         elseif startsWith(layer.Name, 'imageinput')
-            layer_name = ['ImageInput, ', 'InputSize: [', num2str(layer.InputSize), ']'];
+            input_size = [num2str(layer.InputSize(1)), 'x', num2str(layer.InputSize(2))];
+            layer_name = ['ImageInput, ', input_size];
         end
         if ~ strcmp(layer_name, '')
             layer_strings = [layer_strings; string(layer_name)];
